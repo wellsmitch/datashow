@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/echarts.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="main" style="width: 600px;height:400px;"></div>
+		<div id="waterPress" style="width: 600px;height:400px;"></div>
+
+		<script type="text/javascript">
+			var myChart = echarts.init(document.getElementById('main'));
+			var option = {
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					splitLine: {
+						show: false
+					},
+					data: ['总费用', '房租', '水电费', '交通费', '伙食费', '日用品数']
+				},
+				yAxis: {
+					type: 'value'
+				},
+				series: [{
+						name: '辅助',
+						type: 'bar',
+						barWidth:'40%',
+						stack: '总量',//相同的stack可以进行数据堆叠
+						itemStyle: {
+							normal: {
+							 barBorderColor: 'rgba(0,0,0,0)',
+							 color: 'rgba(0,0,0,0.5)'
+							},
+							//emphasis: {
+							//  barBorderColor: 'rgba(0,0,0,0)',
+							//  color: 'rgba(0,0,0,0)'
+							//}
+						},
+						data: [0, 1700, 1400, 1200, 300, 0]
+					},
+					{//3ba1ff
+						name: '生活费',
+						type: 'bar',
+						stack: '总量',
+						label: {
+							normal: {
+								show: true,
+								position: 'outside',
+								color:'red'
+							}
+						},
+						itemStyle: {
+							normal: {
+//							 barBorderColor: 'rgba(0,0,0,0)',
+							 color: '#3ba1ff'
+							},			
+						},
+						data: [2900, 1200, 300, 200, 900, 300]
+					}
+				]
+			}
+			myChart.setOption(option);
+		</script>
+	
+	<script type="text/javascript">
+		                //近7日官网水压情况
+        var topPress = 120;//图表的最高水压
+        var bottomPress = 0;//图表的最低水压
+        var waterPressArr = [0, 17, 14, 20, 30, 0,20];//下限---数据源1
+        var waterPressArr_ = [29, 120, 30, 120, 90, 30, 60];//上限---数据源
+        var waterPress = echarts.init(document.getElementById('waterPress'));
+        var waterPress_ ={
+            title:{
+                text:'最高水压：'+topPress+'MPa       最低水压：'+bottomPress+'MPa',
+                textStyle:{
+                    fontSize:14,
+                    fontWeight:100
+                },
+                top:'3%',
+                left:'10%'
+            },
+            num:0,
+            lebgend:{
+                bottom:'3%',
+                left:'center'
+            },
+            yAxis:{
+                // position:'left',
+                nameLocation:'center',
+                nameRotate:1,
+                nameTextStyle:{
+                    padding:[0, 30, 0, 0]
+                },
+                axisTick:{
+                    show:false
+                },
+                axisLine:{
+                    show:false
+                },
+                axisLabel:{
+                    margin:0
+                },
+                splitLine:{
+                    lineStyle:{
+                        type:'dashed'
+                    }
+                }
+            },
+            xAxis:{
+                boundaryGap:true,
+                data:[1,2,3,4,5,6,7,8]
+            },
+            series: [{
+                silent:false,
+                name: 'qaq',
+                type: 'bar',
+                barWidth:'40%',
+                stack: '总量',//相同的stack可以进行数据堆叠
+                itemStyle: {
+                    normal: {
+                        barBorderColor: 'rgba(0,0,0,0)',
+                        color: 'rgba(0,0,0,0)'
+                    }
+                },
+                label: {
+                    normal:{
+                        show: true,//柱状图数据是否显示
+                        color:'#3ba1ff',
+                        position: ['10%', '0%']
+                    }
+                },
+                data:waterPressArr//下限数据展示
+            },
+                {
+                    name: 'qaq',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,//柱状图数据是否显示
+                            position: 'outside',
+                            color:'#3ba1ff',
+                            formatter:  function (params) {
+                                return params.value + waterPressArr[waterPress_.num++]
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#3ba1ff'
+                        }
+                    },
+                    data: waterPressArr_//上限数据展示
+                }
+            ]
+        };
+        waterPress.setOption(waterPress_);
+        $('#waterPress').append('<div class="positionSelf">'+strEdit('近7日官网水压情况')+'</div>');
+	</script>
+	</body>
+
+</html>

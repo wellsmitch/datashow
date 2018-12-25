@@ -1,0 +1,38 @@
+代码2如下：（显示）
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="js/jquery-3.1.1.min.js"></script>
+
+</head>
+
+<body onload="draw('canvas')">
+<canvas id="canvas" style="width: 500px;height: 350px;background-color:#fff;"></canvas>
+<script>
+var x, y, x1, y1;
+$(function() {
+draw("canvas");
+})
+
+function draw(id) {
+var cvs = document.getElementById(id);
+var ctx = cvs.getContext('2d'); // 画笔 
+
+ctx.fillStyle = "rgba(255,0,0,3)";
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.moveTo(10,100);
+ctx.lineTo(10,100);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+}
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#a{
+				width: 300px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="a" width="" height=""></canvas>
+		<script type="text/javascript">
+			var cvs = document.querySelector('#a')
+			
+			var ctx = cvs.getContext('2d')
+			ctx.fillStyle='#FF0000';
+			ctx.fillRect(0,0,150,75)
+			ctx.strokeRect(50,50,100,100)
+			
+		</script>
+	</body>
+</html>

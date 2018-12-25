@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			#sys{			
+				margin: 0 auto;
+				box-shadow: 0 0 10px #e2dcdc;
+				border-radius: 4px;
+    			overflow: hidden;
+			}
+			#title{
+				text-align: center;
+				height: 26px;
+				line-height: 26px;
+				color: #1269d3;
+			}
+			.data_{
+				display: flex;
+			}
+			.data_ div{
+				flex: 1;
+				text-align: center;
+				color: #969696;
+			}
+			.data_:nth-child(2n){
+				background: #e5e5e5;
+			}
+			.data_:nth-child(2n+1){
+				background: #d9edf7;
+			}
+			p{
+				padding: 0;
+				margin: 0;
+				color: #969696;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="sys">
+			<div id="title" class="success">系统参数</div>
+				<div id="_main"></div>
+				<div class="msg"></div>
+			</div>
+			
+		</div>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			$.ajax({
+				type:"get",
+				url:'a.json',
+//				url:"http://172.16.1.151:8080/loggerMointor/logplatform/queryMointor",
+//				data:{
+//					'ip':'172.16.6.13'
+//				},
+				success:function(data){
+					var p = data					
+					$.each(data,function(ele,i){
+						console.log(ele,p[ele])
+						if(ele!='dfiskinfo'){
+							$('#_main').append(
+								`<div class='data_'>	
+									<div>${ele}</div>
+									<div>${p[ele]}</div>	
+								</div>`
+							)
+						}else if(ele=='dfiskinfo'){
+							$('.msg').append(
+								`<p style='background:#d9edf7;text-align:center'>${ele}</p>
+								<p style='background:#e5e5e5'>${p[ele]}</p>`
+					
+							)
+						}
+					})							
+				}
+			});
+		</script>
+		
+	</body>
+</html>

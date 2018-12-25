@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background:url(img/bg.jpg) center/cover;
+			}
+			/*舞台 
+
+    			容器 
+
+       				图片 
+      				图片
+      				图片
+      		*/
+			
+			.wrap{
+				width: 800px;
+				height: 400px;
+				margin:50px auto;
+				perspective: 1200px;   /*3d舞台*/
+				/*perspective-origin:bottom right;*/
+				
+			}
+			
+			/*容器*/
+			.box{
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				left:0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				transform-style:preserve-3d ;   /*加给转换元素的父元素*/
+				transition: 30s;
+			}
+			
+			/*六个面儿*/
+			.pic{
+				width: 200px;
+				height: 200px;
+				background: rgba(255,255,255,.5);
+				border:1px solid #fff;
+				position:absolute;
+				left:0;
+				top:0;
+				font-size:50px;
+				transition: 2s;
+				
+			}
+			
+			.left{
+				transform: rotatey(-90deg) translatez(100px);
+			}
+			
+			.right{
+				transform: rotatey(90deg) translatez(100px);
+			}
+			
+			.top{
+				transform: rotatex(90deg) translatez(100px);
+			}
+			
+			.bottom{
+				transform: rotatex(-90deg) translatez(100px);
+			}
+			.after{
+				transform: translatez(-100px);
+			}
+			.before{
+				transform: translatez(100px);
+			}
+			
+			.wrap:hover .box{
+				transform: rotatex(720deg) rotateY(720deg);
+			}
+			
+			.box:hover .left{
+				transform: rotatey(-90deg) translatez(200px);
+			}
+			
+			
+			.box:hover .right{
+				transform: rotatey(90deg) translatez(200px);
+			}
+			
+			.box:hover .top{
+				transform: rotatex(90deg) translatez(200px);
+			}
+			
+			.box:hover .bottom{
+				transform: rotatex(-90deg) translatez(200px);
+			}
+			.box:hover .after{
+				transform: translatez(-200px);
+			}
+			.box:hover .before{
+				transform: translatez(200px);
+			}
+			
+			
+			
+			/*第二个容器*/
+			.box2{
+				width:100px ;
+				height:100px;
+				position: absolute;
+				left:0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				transform-style: preserve-3d; /*转换元素的父元素*/
+			}
+			
+			.box2 img{
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+			
+			.box2 img:nth-child(1){
+				transform: rotatey(-90deg) translatez(50px);
+			} 
+			.box2 img:nth-child(2){
+				transform: rotatey(90deg) translatez(50px);
+			} 
+			
+			.box2 img:nth-child(3){
+				transform: rotatex(90deg) translatez(50px);
+			} 
+			
+			.box2 img:nth-child(4){
+				transform: rotatex(90deg) translatez(-50px);
+			} 
+			.box2 img:nth-child(5){
+				transform: translatez(50px);
+			} 
+			.box2 img:nth-child(6){
+				transform: translatez(-50px);
+	
+			} 
+		</style>
+	</head>
+	<body>
+		<!--舞台-->
+		<div class="wrap">
+			<!--容器-->
+			<div class="box">
+				<div class="pic left"></div>
+				<div class="pic right"></div>
+				<div class="pic top"></div>
+				<div class="pic bottom"></div>
+				<div class="pic after"></div>
+				<div class="pic before"></div>
+				<!--第二个容器-->
+				<div class="box2">
+					<img src="img/01.png" alt="" />
+					<img src="img/02.png" alt="" />
+					<img src="img/03.png" alt="" />
+					<img src="img/04.png" alt="" />
+					<img src="img/05.png" alt="" />
+					<img src="img/06.png" alt="" />
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+

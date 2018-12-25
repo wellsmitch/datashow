@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#a{
+				width: 300px;
+				height: 300px;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<div id="a">
+		<canvas id="b" width="300" height="300"></canvas>
+			
+		</div>
+
+		<script type="text/javascript">
+			var cvs = document.querySelector('#b')
+			
+			var ctx = cvs.getContext('2d')
+			//直线
+			ctx.beginPath();
+			ctx.moveTo(100,100);
+			ctx.lineTo(200,150)
+			ctx.lineTo(60,150)
+			ctx.closePath()
+			ctx.stroke()
+			
+			//直线
+			ctx.beginPath();
+			ctx.moveTo(100,200);
+			ctx.lineTo(200,300)
+			ctx.lineTo(60,300)
+			ctx.closePath()
+			ctx.fill()
+			
+		</script>
+	</body>
+</html>

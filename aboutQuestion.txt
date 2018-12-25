@@ -1,0 +1,28 @@
+1、解决echarts横坐标显示不全文本的三种解决方案 ------https://blog.csdn.net/kebi007/article/details/68488694
+2、解决条形图多种颜色统一管理问题：
+series:[{
+	itemStyle:{
+	        color: function(a) {
+	            var colorList = ['#C33531','#EFE42A','#64BD3D','#EE9201','#29AAE3', '#B74AE5','#0AAF9F','#E89589','#16A085','#4A235A','#C39BD3 ','#F9E79F','#BA4A00','#ECF0F1','#616A6B','#EAF2F8','#4A235A','#3498DB' ];
+	            return colorList[a.dataIndex]
+	        }
+	
+	},
+}]
+3、chart.setOption(option, notMerge, lazyUpdate);
+	option
+	
+	图表的配置项和数据，具体见配置项手册。
+	
+	notMerge
+	
+	可选，是否不跟之前设置的option进行合并，默认为false，即合并。
+	
+	lazyUpdate
+	
+	可选，在设置完option后是否不立即更新图表，默认为false，即立即更新。
+	
+	silent
+	
+	可选，阻止调用 setOption 时抛出事件，默认为false，即抛出事件。
+ 

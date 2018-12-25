@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="../js/echarts.js" type="text/javascript" charset="utf-8"></script>
+
+	<body>
+		<div id="bar_1" style="width: 300px;height: 300px;"></div>
+
+		<script type="text/javascript">
+			var bar1 = echarts.init(document.querySelector('#bar_1'))
+			var bar1_ = {
+				title:{
+					text:'主标题',
+					textStyle:{
+						color:'#1269d3'
+					},
+					subtext:'附标题\n456798',//此处的\n可以解析
+					subtextStyle:{
+						color:'#999'
+					}
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+				},
+				yAxis: {
+					type: 'value'
+				},
+				series: [{
+					data: [820, 932, 901, 934, 1290, 1330, 1320],
+					type: 'line',
+					areaStyle: {}
+				}]
+			}
+			
+			bar1.setOption(bar1_)
+		</script>
+	</body>
+
+</html>

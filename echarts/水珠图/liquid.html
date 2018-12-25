@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../js/echarts-liquidfill.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+
+	<body>
+		<div id="orderPerson" style="width: 500px;height: 500px;"></div>
+
+		<script type="text/javascript">
+			var orderPerson = echarts.init(document.getElementById('orderPerson'));
+			var orderPerson_ = {
+				series: [{
+					color: ['#6abeff'],
+					center: ['50%', '50%'],
+					radius: '70%',
+					type: 'liquidFill',
+					data: [0.7],
+					label: {
+						normal: {
+							textStyle: {
+								fontSize: 10
+							}
+						}
+					},
+					outline: {
+						show: false
+					}
+				}]
+			};
+			orderPerson.setOption(orderPerson_);
+		</script>
+	</body>
+
+</html>

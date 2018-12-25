@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<div class="a1"></div>
+
+
+</body>
+<script type="text/javascript">
+    var dataset = [10, 20, 30, 40, 50];
+    var p1 = d3.selectAll('p')
+        .data(dataset)
+        .enter()
+        .append('pp')
+        .text(a=>{return a})
+    console.log(p1);
+
+    // var p1 = d3.select('body').append('p')
+    // p1.classed('aa',false)
+    // .classed('bb',true)
+
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/echarts.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="main" style="width: 600px;height:400px;"></div>
+		<script type="text/javascript">
+			var myChart = echarts.init(document.getElementById('main'));
+			var gauge_1 = {
+				title: {
+					text: '50%',
+					left: 'center',
+					top: '60%',
+					textStyle: {
+						fontSize: 14,
+						color: '#fff',
+						fontWeight: 100
+					}
+				},
+				series: [{
+					name: '业务指标',
+					type: 'gauge',
+					startAngle: 180,
+					endAngle: 0,
+					max: 100,
+					clockwise: true, //顺时针
+					axisLabel: {
+						formatter: function(data) {
+							return ''
+						}
+					},
+					// 去掉多余的分段
+					splitNumber: 1,
+					center: ['50%', '85%'],
+					radius:'148%',
+					axisLine: {
+						lineStyle: {
+							width: 300,
+							color: [
+								[0.4, '#1ab0e1'],
+								[1, '#cbf2ff']
+							]
+						}
+					},
+					axisTick: {
+						// 刻度长度与轴线宽度一致，达到分隔的效果
+						length: 100,
+						// 增加刻度密度
+						splitNumber: 1,
+					},
+					 detail: {
+                   		color: 'transparent',
+//                 		color: '#ff0',
+                   		offsetCenter: [0, '-10%']
+	                },
+				}],
+			};
+
+			myChart.setOption(gauge_1);
+		</script>
+	</body>
+
+</html>

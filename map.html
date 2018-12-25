@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		#_container_{
+			width:500px;
+			height: 500px;
+		}
+	</style>
+</head>
+<body>
+<script src="https://webapi.amap.com/maps?v=1.4.10&key=3f790ae82c7d39190cc791a7098360c0"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<div id="_container_"></div>
+<script type="text/javascript">
+    //地图
+    function Map(arr_) {
+        var map = new AMap.Map('_container_', {
+            resizeEnable: true,
+            center: [113.642005,34.726045],
+            zoom: 13
+        });
+        var arr = arr_
+//      arr = [//数据入口***************************
+//          [113.6401, 34.72468,'地址1',1],
+//          [113.6451, 34.72468,'地址2',2],
+//          [113.6431, 34.72468,'地址3',3]
+//      ];
+        //标注**************************
+//      if(ele['longitude']!=0&&ele['longitude']!=null){
+//  				console.log(ele['longitude'],ele['latitude'])
+//  			}
+        arr.forEach(function (ele,i) {
+//      	console.log(ele['longitude'],ele['latitude'])
+
+
+
+            if(ele['longitude']!=0&&ele['longitude']!=null){
+                console.log(ele['longitude'],ele['latitude'])
+                let marker = new AMap.Marker({
+                    map:map,
+                    position: [
+//                  ele[0],ele[1]
+                        ele['longitude'],ele['latitude']
+                    ],
+                    content:`<strong style='background:url("${'//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png'}") center/cover no-repeat;
+display: block;height: 42px;width:28px;text-align:center;line-height: 30px;color: #fff;'>${i}</strong>`,
+                    offset: new AMap.Pixel(-13, -30)
+                });
+
+
+
+
+            marker.setTitle('我是marker的title');
+            AMap.event.addListener(marker, 'click', function () {
+                console.log(marker.getPosition());
+                infoWindow.open(map,marker.getPosition());
+
+                //**********************在此点击事件中加入相关数据逻辑
+            });
+            /*************多地点时候地点关于地图布局的自适应***************/
+            var newCenter = map.setFitView();
+
+            //实例化信息窗体
+            var title = '方恒假日酒店<span style="font-size:11px;color:#F00;">价格:318</span>',
+                content = [];
+            content.push("地址：北京市朝阳区阜通东大街6号院3号楼东北8.3公里");
+            content.push("电话：010-64733333");
+            content.push("<a href='#'>详细信息</a>");
+            var infoWindow = new AMap.InfoWindow({
+                isCustom: true,  //使用自定义窗体
+                content: createInfoWindow(title, content.join("<br/>")),
+                offset: new AMap.Pixel(16, -45)
+            });
+            //构建自定义信息窗体
+            function createInfoWindow(title, content) {
+                var info = document.createElement("div");
+                info.className = "custom-info input-card content-window-card";
+
+                //可以通过下面的方式修改自定义窗体的宽高
+                //info.style.width = "400px";
+                // 定义顶部标题
+                var top = document.createElement("div");
+                var titleD = document.createElement("div");
+                var closeX = document.createElement("img");
+                top.className = "info-top";
+                titleD.innerHTML = title;
+                closeX.src = "https://webapi.amap.com/images/close2.gif";
+                closeX.onclick = closeInfoWindow;
+
+                top.appendChild(titleD);
+                top.appendChild(closeX);
+                info.appendChild(top);
+
+                // 定义中部内容
+                var middle = document.createElement("div");
+                middle.className = "info-middle";
+                middle.style.backgroundColor = 'white';
+                middle.innerHTML = content;
+                info.appendChild(middle);
+
+                // 定义底部内容
+                var bottom = document.createElement("div");
+                bottom.className = "info-bottom";
+                bottom.style.position = 'relative';
+                bottom.style.top = '0px';
+                bottom.style.margin = '0 auto';
+                var sharp = document.createElement("img");
+                sharp.src = "https://webapi.amap.com/images/sharp.png";
+                bottom.appendChild(sharp);
+                info.appendChild(bottom);
+                return info;
+            }
+
+            //关闭信息窗体
+            function closeInfoWindow() {
+                map.clearInfoWindow();
+            }
+            //实例化信息窗体
+            var title = '方恒假日酒店<span style="font-size:11px;color:#F00;">价格:318</span>',
+                content = [];
+            content.push("<img src='http://tpc.googlesyndication.com/simgad/5843493769827749134'>地址：北京市朝阳区阜通东大街6号院3号楼东北8.3公里");
+            content.push("电话：010-64733333");
+            content.push("<a href='https://ditu.amap.com/detail/B000A8URXB?citycode=110105'>详细信息</a>");
+            var infoWindow = new AMap.InfoWindow({
+                isCustom: true,  //使用自定义窗体
+                content: createInfoWindow(title, content.join("<br/>")),
+                offset: new AMap.Pixel(16, -45)
+            });
+
+            //构建自定义信息窗体
+            function createInfoWindow(title, content) {
+                var info = document.createElement("div");
+                info.className = "custom-info input-card content-window-card";
+
+                //可以通过下面的方式修改自定义窗体的宽高
+                //info.style.width = "400px";
+                // 定义顶部标题
+                var top = document.createElement("div");
+                var titleD = document.createElement("div");
+                var closeX = document.createElement("img");
+                top.className = "info-top";
+                titleD.innerHTML = title;
+                closeX.src = "https://webapi.amap.com/images/close2.gif";
+                closeX.onclick = closeInfoWindow;
+
+                top.appendChild(titleD);
+                top.appendChild(closeX);
+                info.appendChild(top);
+
+                // 定义中部内容
+                var middle = document.createElement("div");
+                middle.className = "info-middle";
+                middle.style.backgroundColor = 'white';
+                middle.innerHTML = content;
+                info.appendChild(middle);
+
+                // 定义底部内容
+                var bottom = document.createElement("div");
+                bottom.className = "info-bottom";
+                bottom.style.position = 'relative';
+                bottom.style.top = '0px';
+                bottom.style.margin = '0 auto';
+
+                //底部箭头指向
+                var sharp = document.createElement("img");
+                sharp.src = "https://webapi.amap.com/images/sharp.png";
+                bottom.appendChild(sharp);
+                info.appendChild(bottom);
+
+                //定位图标内的数字
+                var numcite = document.createElement("div");
+                numcite.innerText = 111111111
+                bottom.style.position = 'relative';
+                bottom.style.top = '0px';
+                return info;
+            }
+            //关闭信息窗体
+            function closeInfoWindow() {
+                map.clearInfoWindow();
+            }
+            $('.amap-copyright,.amap-logo').css({marginLeft: '-9999px', 'color': 'red'})
+            }
+        });
+        $('.amap-copyright')[0].style.visibility = 'hidden'
+
+    }
+    //  Map();
+    $.ajax({
+        type:"get",
+        url:"a.txt",
+        async:true,
+        success:function(data){
+            console.log(JSON.parse(data))
+//  		JSON.parse(data).forEach(function(ele,i){
+//
+//  			if(ele['longitude']!=0&&ele['longitude']!=null){
+//  				console.log(ele['longitude'],ele['latitude'])
+//  			}
+//  		})
+
+            Map(JSON.parse(data));
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<select id="a" name="bb">
+			<option value="1">1111</option>
+			<option value="2">2222</option>
+			<option value="3">3333</option>
+			<option value="4">44444</option>
+		</select>
+		<script type="text/javascript">
+//			var a = document.querySelector('#a')
+//			var body = document.querySelector('body')
+//			$('body').click(function(){
+//				console.log(12346)
+//				
+//			})
+
+			console.log($('#a').find("option:selected").text())
+
+			$('#a').on('change',function(){
+
+				console.log($('#a').find("option:selected").text())
+				
+			})
+
+			$('#a').click(function(){
+
+				console.log($('#a').find("option:selected").val())
+				
+			})
+
+//			$('#a').on('change',function(){
+//				var options=document.querySelector('#a')
+//				console.log(options.selectedIndex)
+//				console.log(options.value)
+//				console.log(options[options.selectedIndex].text)
+//			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>智能楼宇</title>
+
+    <script src="ht.js" type="text/javascript" charset="utf-8"></script>
+    <script src="ht-ui.js"></script>
+    <script src="SelectListItemDrawable.js"></script>
+    <script src="ht-obj.js"></script>
+
+   <!--  <script src="../../../../htforwebold/build/ht-debug.js"></script>
+    <script src="../../../../htforwebold/build/ht-obj-debug.js"></script>
+    <script src="../../../../ht-ui-2.9/lib/ht-ui.js"></script> -->
+
+</head>
+<body>
+<script>
+ht.Default.setImage('camera', './symbols/智能楼宇/camera.json');
+(function(){
+    // var dm, g3d, relativeLayout, g2d, title,
+        floor = {}, city = {};
+
+    dm = new ht.DataModel();
+    g3d = new ht.graph3d.Graph3dView(dm);
+
+    g3d.setEye([755, 314, -96]);
+    g3d.getView().style.background = "url('./assets/bg.png') center/cover no-repeat";
+
+    var loadCity = function(){
+        ht.Default.loadObj('obj/city.obj', 'obj/city.mtl', {
+            center: true,
+            // cube: true,
+            prefix: 'obj/',
+            shape3d: 'city',
+            finishFunc: function(modelMap, array, rawS3){
+                city.rawS3 = rawS3;
+                showCity();
+            }
+        });
+    }
+
+    var loadFloor = function(){
+        ht.Default.loadObj('obj/floor.obj', 'obj/floor.mtl', {
+            center: true,
+            cube: true,
+            prefix: 'obj/',
+            shape3d: 'floor',
+            finishFunc: function(modelMap, array, rawS3){
+                floor.rawS3 = rawS3;
+            }
+        });
+    }
+
+    var showCity = function(){
+        dm.clear();
+        g3d.setCenter([0, 0, 0]);
+        var rawS3 = floor.rawS3,
+            node = new ht.Node();
+        node.s({
+            'shape3d': 'city',
+            'wf.visible': 'selected',
+            '3d.selectable': false
+        });
+        node.s3(1/100, 1/100, 1/100);
+        node.p3(0, 0, 0);
+
+        console.log(rawS3);
+        dm.add(node);
+
+    }
+
+    var showFloor = function(){
+        g3d.setCenter([210, 0, 210])
+        dm.clear();
+        var rawS3 = floor.rawS3,
+            node = new ht.Node();
+        node.s({
+            'shape3d': 'floor',
+            'wf.visible': 'selected',
+            '3d.selectable': false
+        });
+        node.s3(rawS3[0] / 10,rawS3[1]/ 10,rawS3[2] / 10);
+        // node.s3(1/10, 1/10, 1/10);
+        node.p3(140, 0, 230);
+
+        dm.add(node);
+
+        createNode([0, 20, 0]);
+        createNode([110, 20, 220]);
+        createNode([330, 20, 420]);
+        createNode([210, 20, 120]);
+        createNode([420, 20, 120]);
+
+    };
+
+    var layout = function(){
+        relativeLayout = new ht.ui.RelativeLayout();
+        relativeLayout.setId('contentRelative');
+
+        var ht3dView = new ht.ui.HTView(g3d);
+        ht3dView.setId('contentHTView');
+        relativeLayout.addView(ht3dView, {
+            width: 'match_parent',
+            height: 'match_parent'
+        });
+        // 列表
+        var listView = window.list = new ht.ui.ListView();
+        listView.setBackground('./symbols/智能楼宇/bg.json');
+        listView.setLabelColor('#fff');
+        listView.setSelectLabelColor('#fff');
+        listView.setPadding([60, 10, 30, 10]);
+        listView.setHoverBackground('#333');
+        listView.setSelectBackgroundDrawable(new ht.ui.drawable.SelectListItemDrawable(2, '#0c7eff', '#333', '#333'));
+        listView.setZIndex(10);
+
+        for (var i = 1; i <= 15; i++) {
+            var data = new ht.Data();
+            data.setName('楼层' + i);
+            listView.dm().add(data);
+        }
+        relativeLayout.addView(listView, {
+            align: 'left',
+            vAlign: 'top',
+            marginTop: 120,
+            marginLeft: 60,
+            width: 80,
+            height: 480,
+            index: 100
+        });
+        //列表点击
+        listView.dm().sm().ms(function(e){
+            if (e.kind === 'set') {
+                showFloor();
+            }
+        });
+        listView.getView().addEventListener('click', function(e){
+            e.preventDefault();
+            console.log(e);
+            if (e.clientY - 120 < 50) {
+                showCity();
+                listView.dm().sm().cs();
+            }
+        });
+
+        // 标题
+        var titleView = new ht.ui.View();
+            titleView.setBackground('./symbols/智能楼宇/title.json');
+        relativeLayout.addView(titleView, {
+            width: 'match_parent',
+            height: 220
+        });
+        titleView.setZIndex(1);
+        // title = new ht.Node();
+        // title.setAnchor(0, 0);
+        // title.p(0, 0);
+        // title.setImage('./symbols/智能楼宇/title.json');
+        // title.s('image.stretch', 'uniform');
+        // g2d.dm().add(title);
+        // resizeTitle();
+
+
+        relativeLayout.addToDOM();
+    }
+
+    // function resizeTitle(){
+    //     var cw = document.body.clientWidth;
+    //     title.p((cw - 1440) * 0.5, 0);
+    // }
+
+    function createNode(p3, s3){
+        var node = new ht.Node();
+        node.p3(p3);
+        // node.s3(s3);
+        node.s({
+            'shape3d': 'plane',
+            'shape3d.image': 'camera',
+             'shape3d.image.cache' : true,
+            'shape3d.autorotate': true,
+            'shape3d.transparent': true,
+        //      'shape3d.alwaysOnTop': true,
+            'shape3d.fixSizeOnScreen': [ 38, 47 ]
+        });
+        dm.add(node);
+        return node;
+    }
+
+    // window.addEventListener('resize', function(){
+    //     resizeTitle();
+    // });
+
+    window.addEventListener('load', function(){
+        loadCity();
+        loadFloor();
+        layout();
+    });
+})();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#a{
+				width: 300px;
+				height: 300px;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<div id="a">
+		<canvas id="b" width="300" height="300"></canvas>
+			
+		</div>
+
+		<script type="text/javascript">
+			var cvs = document.querySelector('#b')
+			
+			var ctx = cvs.getContext('2d')
+			//直线
+			cvs.onmousedown = function(ev){
+				var ev = ev || window.event;
+				ctx.moveTo(ev.clientX-cvs.offsetLeft,ev.clientY-cvs.offsetTop)
+				document.onmousemove = function(ev){
+					ctx.lineTo(ev.clientX - cvs.offsetLeft,ev.clientY - cvs.offsetTop);
+					ctx.stroke()
+				}
+			}
+			
+			
+			document.onmouseup =  function(){
+				document.onmousemove = null
+//				cvs.onmousedown = null
+			}
+		</script>
+	</body>
+</html>
