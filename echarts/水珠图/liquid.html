@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="../js/echarts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="../js/echarts-liquidfill.js" type="text/javascript" charset="utf-8"></script>
-		
 	</head>
-
 	<body>
+	<div style="color: rgba(250,219,50,.3)">efwrfewrew</div>
 		<div id="orderPerson" style="width: 500px;height: 500px;"></div>
-
 		<script type="text/javascript">
 			var orderPerson = echarts.init(document.getElementById('orderPerson'));
 			var orderPerson_ = {
@@ -21,7 +18,7 @@
 					center: ['50%', '50%'],
 					radius: '70%',
 					type: 'liquidFill',
-					data: [0.7],
+					data: [0.7,.7],
 					label: {
 						normal: {
 							textStyle: {
@@ -34,8 +31,61 @@
 					}
 				}]
 			};
+
+            var option = {
+                series: [{
+                    data: [0.7, .3],
+                    color: ['#294D99', '#156ACF', '#1598ED', '#45BDFF'],
+                    center: ['50%', '50%'],
+                    radius: '50%',
+                    amplitude: '8%',
+                    waveLength: '80%',
+                    phase: 'auto',
+                    period: 'auto',
+                    direction: 'right',
+                    shape: 'circle',
+                    waveAnimation: true,
+                    animationEasing: 'linear',
+                    animationEasingUpdate: 'linear',
+                    animationDuration: 2000,
+                    animationDurationUpdate: 1000,
+                    outline: {
+                        show: true,
+                        borderDistance: 8,
+                        itemStyle: {
+                            color: 'none',
+                            borderColor: '#294D99',
+                            borderWidth: 8,
+                            shadowBlur: 20,
+                            shadowColor: 'rgba(0, 0, 0, 0.25)'
+                        }
+                    },
+                    backgroundStyle: {
+                        color: '#E3F7FF'
+                    },
+                    itemStyle: {
+                        opacity: 0.95,
+                        shadowBlur: 50,
+                        shadowColor: 'rgba(0, 0, 0, 0.4)'
+                    },
+                    label: {
+                        show: true,
+                        color: '#294D99',
+                        insideColor: '#fff',
+                        fontSize: 50,
+                        fontWeight: 'bold',
+                        align: 'center',
+                        baseline: 'middle',
+                        position: 'inside'
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            opacity: 0.8
+                        }
+                    }
+                }]
+            };
 			orderPerson.setOption(orderPerson_);
 		</script>
 	</body>
-
 </html>
